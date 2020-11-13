@@ -29,12 +29,15 @@ class OrderView(APIView):
                                         address=request.data["address"]
                                         )
         order.save()
+
+        # Отправка сообщения
         connection = pika.BlockingConnection(
             pika.ConnectionParameters(host='localhost'))
         channel = connection.channel()
 
-        channel.queue_declare(queue='orders')
+        channel.exchange_declare(exchange='fanout', exchange_type='fanout')
 
-        channel.basic_publish(exchange="", routing_key='orders', body=TabletOrderSchema().dumps(order))
+        channel.basic_publish(exchange='fanout', routing_key='', body=TabletOrderSchema().dumps(order))
         connection.close()
+
         return Response(status=200)
