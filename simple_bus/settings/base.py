@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.erp",
     "apps.tablet",
+    "apps.drive",
 ]
 
 MIDDLEWARE = [

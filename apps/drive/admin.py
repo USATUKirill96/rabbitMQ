@@ -2,5 +2,9 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from .models import DriveOrder
 
-# Register your models here.
+
+@admin.register(DriveOrder)
+class DriveOrderAdmin(admin.ModelAdmin):
+    pass

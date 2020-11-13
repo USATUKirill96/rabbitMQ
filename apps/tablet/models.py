@@ -8,6 +8,7 @@ from django.db import models
 
 class TabletOrder(models.Model):
     name = models.CharField(max_length=250)
+    order_id = models.IntegerField()
     quantity = models.IntegerField()
     delivery_at = models.DateTimeField()
 

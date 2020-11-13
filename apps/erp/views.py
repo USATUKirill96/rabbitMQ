@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 # thirdparty
 from datetime import datetime
+
+from kombu.transport.virtual.exchange import ExchangeType, FanoutExchange
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .schemas import OrderSchema, TabletOrderSchema
@@ -33,6 +35,6 @@ class OrderView(APIView):
 
         channel.queue_declare(queue='orders')
 
-        channel.basic_publish(exchange='', routing_key='orders', body=TabletOrderSchema().dumps(order))
+        channel.basic_publish(exchange="", routing_key='orders', body=TabletOrderSchema().dumps(order))
         connection.close()
         return Response(status=200)

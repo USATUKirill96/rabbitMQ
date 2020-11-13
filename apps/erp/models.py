@@ -9,7 +9,7 @@ from django.db import models
 class ErpOrder(models.Model):
     name = models.CharField(max_length=250)
     quantity = models.IntegerField()
-    delivery_at = models.DateTimeField()
+    delivery_at = models.DateTimeField(blank=True, null=True)
     address = models.CharField(max_length=250)
 
     def __str__(self):

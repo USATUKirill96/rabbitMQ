@@ -5,4 +5,9 @@ from django.apps import AppConfig
 
 
 class DriveConfig(AppConfig):
-    name = "drive"
+    name = "apps.drive"
+
+    def ready(self):
+        from .tasks import drive_consumer
+        drive_consumer.apply_async(countdown=1)
+

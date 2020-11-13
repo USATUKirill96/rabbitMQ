@@ -5,4 +5,8 @@ from django.apps import AppConfig
 
 
 class TabletConfig(AppConfig):
-    name = "tablet"
+    name = "apps.tablet"
+
+    def ready(self):
+        from .tasks import tablet2_consumer
+        tablet2_consumer.apply_async(countdown=1)
